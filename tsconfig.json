@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", //nextjs absolute import
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
