@@ -1,4 +1,7 @@
-import { GetReportsResDto } from "@/dto/reports/res/get.reports.res.dto";
+import {
+  GetReportItemType,
+  GetReportsResDto,
+} from "@/dto/reports/res/get.reports.res.dto";
 import { Report } from "@/models/report";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -8,20 +11,20 @@ export const getReports = createAsyncThunk<
   string | undefined
 >("report/getReports", async (device_id, { rejectWithValue }) => {
   try {
-    const response = await axios.get("/api/reports", {
+    const response = await axios.get<GetReportsResDto>("/api/reports", {
       params: { device_id },
     });
     console.log(response);
     return response.data;
   } catch (e: any) {
-    rejectWithValue(e.response.data);
     console.log(e);
+    return rejectWithValue(e.response.data);
   }
 });
 
 interface ReportState {
-  reports: Array<Report>;
-  selectedReport: Report | null;
+  reports: GetReportsResDto;
+  selectedReport: GetReportItemType | null;
 }
 
 const initialState: ReportState = {

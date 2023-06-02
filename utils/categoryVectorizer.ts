@@ -8,19 +8,21 @@ export type CategryText =
   | "Getting a credit card";
 
 export const returnCategoryFromIndex = (index: number) => {
-  if (index === 1) {
+  if (index === 2) {
     return "Improper use of your report" as CategryText;
-  } else if (index === 2) {
-    return "Trouble during payment process" as CategryText;
   } else if (index === 3) {
-    return "Problem with a purchase shown on your statement" as CategryText;
+    return "Trouble during payment process" as CategryText;
   } else if (index === 4) {
-    return "Took or threatened to take negative or legal action" as CategryText;
+    return "Problem with a purchase shown on your statement" as CategryText;
   } else if (index === 5) {
-    return "Struggling to pay mortgage" as CategryText;
+    return "Took or threatened to take negative or legal action" as CategryText;
   } else if (index === 6) {
+    return "Struggling to pay mortgage" as CategryText;
+  } else if (index === 7) {
     return "Closing an account" as CategryText;
-  } else {
+  } else if (index === 8) {
     return "Getting a credit card" as CategryText;
+  } else {
+    throw new Error("Invalid index");
   }
 };

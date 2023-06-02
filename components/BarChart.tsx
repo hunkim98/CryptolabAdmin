@@ -55,51 +55,57 @@ export default class ComplaintBarChart extends PureComponent<{
             labelStyle={{
               color: "white",
               backgroundColor: "#363636",
+              padding: 0,
+              margin: 0,
             }}
             wrapperStyle={{
               backgroundColor: "#363636",
               color: "white",
+              border: "none",
+              padding: 0,
+              margin: 0,
               // border: "1px solid white",
             }}
             itemStyle={{
               backgroundColor: "#363636",
+              border: "none",
 
               // border: "1px solid white",
             }}
           />
           <Legend />
           <Bar
-            dataKey={returnCategoryFromIndex(1)}
+            dataKey={returnCategoryFromIndex(2)}
             stackId="a"
             fill="#ffd6a5"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(2)}
+            dataKey={returnCategoryFromIndex(3)}
             stackId="a"
             fill="#fdffb6"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(3)}
+            dataKey={returnCategoryFromIndex(4)}
             stackId="a"
             fill="#caffbf"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(4)}
+            dataKey={returnCategoryFromIndex(5)}
             stackId="a"
             fill="#9bf6ff"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(5)}
+            dataKey={returnCategoryFromIndex(6)}
             stackId="a"
             fill="#a0c4ff"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(6)}
+            dataKey={returnCategoryFromIndex(7)}
             stackId="a"
             fill="#bdb2ff"
           />
           <Bar
-            dataKey={returnCategoryFromIndex(7)}
+            dataKey={returnCategoryFromIndex(8)}
             stackId="a"
             fill="#ffc6ff"
           />

@@ -13,8 +13,8 @@ export const getCategories = createAsyncThunk<GetCategoriesResDto>(
       console.log(response);
       return response.data;
     } catch (e: any) {
-      rejectWithValue(e.response.data);
       console.log(e);
+      return rejectWithValue(e.response.data);
     }
   }
 );

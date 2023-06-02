@@ -12,3 +12,7 @@ a {
 * {
   box-sizing: border-box;
 }
+
+recharts-default-tooltip {
+  padding: 0px !important;
+}

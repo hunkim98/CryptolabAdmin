@@ -33,13 +33,6 @@ const Index: NextPage = () => {
     dateIndices.reverse();
     for (let i = 0; i < dateIndices.length; i++) {
       data[i] = {
-        // "Improper use of your report": 0,
-        // "Trouble during payment process": 0,
-        // "Problem with a purchase shown on your statement": 0,
-        // "Took or threatened to take negative or legal action": 0,
-        // "Struggling to pay mortgage": 0,
-        // "Closing an account": 0,
-        // "Getting a credit card": 0,
         date: dateIndices[i],
       };
     }
@@ -69,7 +62,14 @@ const Index: NextPage = () => {
     // fetch("/api/report?device_id=1").then((res) => console.log(res));
   }, [dispatch]);
 
-  const onClickReply = useCallback(
+  const onClickCreateReply = useCallback(
+    (id: number) => {
+      router.push(`/report/${id}`);
+    },
+    [router]
+  );
+
+  const onClickModifyReply = useCallback(
     (id: number) => {
       router.push(`/reply/${id}`);
     },
@@ -87,7 +87,7 @@ const Index: NextPage = () => {
             <th>category</th>
             {/* <th>title</th> */}
             <th>content</th>
-            <th>created at</th>
+            <th>date</th>
             <th>action</th>
           </tr>
         </thead>
@@ -100,9 +100,20 @@ const Index: NextPage = () => {
                   <td>{element.content}</td>
                   <td>{new Date(element.created_at).toLocaleDateString()}</td>
                   <td>
-                    <Button onClick={() => onClickReply(element.id)}>
-                      Reply
-                    </Button>
+                    {element.replies.length === 0 ? (
+                      <Button onClick={() => onClickCreateReply(element.id)}>
+                        Reply
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() =>
+                          onClickModifyReply(element.replies[0].id)
+                        }
+                        color="violet"
+                      >
+                        Modify
+                      </Button>
+                    )}
                   </td>
                 </tr>
               );
