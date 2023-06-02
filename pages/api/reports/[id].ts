@@ -11,9 +11,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const response = await axios.get<GetReportsResDto>(
-    `${process.env.API_URL}/report/`
-  );
-  console.log(response.data);
-  res.status(200).send(response.data);
+  const query = req.query;
+  const { id } = query;
+  if (!id) {
+    res.status(502).end();
+  }
+  if (req.method === "GET") {
+    const response = await axios.get<GetReportsResDto>(
+      `${process.env.API_URL}/report/${id}/`
+    );
+    console.log(response.data);
+    res.status(200).send(response.data);
+  } else {
+    res.status(502).end();
+  }
 }
