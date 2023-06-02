@@ -36,17 +36,17 @@ function MyApp({ Component, pageProps, ...rest }: AppProps) {
   const [opened, setOpened] = useState(false);
   axios.defaults.withCredentials = true; // even for get requests if
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        /** Put your mantine theme override here */
-        colorScheme: "dark",
-      }}
-    >
-      {/* <AuthContextProvider> */}
-      <ModalsProvider modals={{ alert: AlertModal }}>
-        <Provider store={store}>
+    <Provider store={store}>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          /** Put your mantine theme override here */
+          colorScheme: "dark",
+        }}
+      >
+        {/* <AuthContextProvider> */}
+        <ModalsProvider modals={{ alert: AlertModal }}>
           {/* <AuthWrapper> */}
           <AppShell
             styles={(theme) => ({
@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps, ...rest }: AppProps) {
                   </MediaQuery>
                   <Link href="/">
                     <Text>
-                      <h1>Pickgeul</h1>
+                      <h1>Heean Enterprise</h1>
                     </Text>
                   </Link>
                 </div>
@@ -109,10 +109,10 @@ function MyApp({ Component, pageProps, ...rest }: AppProps) {
             <Component {...pageProps} />
           </AppShell>
           {/* </AuthWrapper> */}
-        </Provider>
-      </ModalsProvider>
-      {/* </AuthContextProvider> */}
-    </MantineProvider>
+        </ModalsProvider>
+        {/* </AuthContextProvider> */}
+      </MantineProvider>
+    </Provider>
   );
 }
 

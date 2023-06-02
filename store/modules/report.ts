@@ -5,10 +5,10 @@ import axios from "axios";
 
 export const getReports = createAsyncThunk<
   GetReportsResDto,
-  { device_id?: string }
->("report/getReports", async ({ device_id }, { rejectWithValue }) => {
+  string | undefined
+>("report/getReports", async (device_id, { rejectWithValue }) => {
   try {
-    const response = await axios.get("/api/report", {
+    const response = await axios.get("/api/reports", {
       params: { device_id },
     });
     console.log(response);

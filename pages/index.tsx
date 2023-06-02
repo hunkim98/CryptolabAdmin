@@ -2,9 +2,17 @@ import { Container, Group, Table } from "@mantine/core";
 import { NextPage } from "next";
 import React, { useEffect } from "react";
 import ComplaintBarChart from "@/components/BarChart";
+import { getReports } from "@/store/modules/report";
+import { useAppDispatch } from "@/store/hooks";
+import axios from "axios";
 
 const Index: NextPage = () => {
-  useEffect(() => {}, []);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    console.log("hi");
+    axios.get("/api/reports").then((res) => console.log(res.data));
+    // fetch("/api/report?device_id=1").then((res) => console.log(res));
+  }, []);
   return (
     <Container fluid>
       <div>hi</div>
