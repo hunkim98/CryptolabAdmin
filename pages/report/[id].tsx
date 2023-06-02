@@ -1,12 +1,12 @@
-import { Group, TextInput, Title } from "@mantine/core";
+import { Container, Group, TextInput, Title } from "@mantine/core";
 import { NextPage } from "next";
 import React, { useState } from "react";
 import { BarChart } from "recharts";
 
-const Reply: NextPage = () => {
+const Report: NextPage = () => {
   const [input, setInput] = useState<string>("");
   return (
-    <Group>
+    <Container fluid>
       <Title>Reply</Title>
       <TextInput
         value={input}
@@ -14,8 +14,8 @@ const Reply: NextPage = () => {
           setInput(e.target.value);
         }}
       />
-    </Group>
+    </Container>
   );
 };
 
-export default Reply;
+export default Report;

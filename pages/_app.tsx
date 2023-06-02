@@ -74,9 +74,9 @@ function MyApp({ Component, pageProps, ...rest }: AppProps) {
                 <Navbar.Section mt="md">
                   <Link href="/">Check Complaints</Link>
                 </Navbar.Section>
-                <Navbar.Section mt="md">
+                {/* <Navbar.Section mt="md">
                   <Link href="/post">Reply to Complaint</Link>
-                </Navbar.Section>
+                </Navbar.Section> */}
               </Navbar>
             }
             header={

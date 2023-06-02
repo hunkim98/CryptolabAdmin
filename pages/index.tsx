@@ -1,21 +1,34 @@
-import { Container, Group, Table } from "@mantine/core";
+import { Button, Container, Group, Table } from "@mantine/core";
 import { NextPage } from "next";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import ComplaintBarChart from "@/components/BarChart";
 import { getReports } from "@/store/modules/report";
-import { useAppDispatch } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const Index: NextPage = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
+  const reports = useAppSelector((state) => state.report.reports);
   useEffect(() => {
-    console.log("hi");
-    axios.get("/api/reports").then((res) => console.log(res.data));
+    dispatch(getReports())
+      .unwrap()
+      .then((res) => {
+        console.log(res);
+      });
     // fetch("/api/report?device_id=1").then((res) => console.log(res));
-  }, []);
+  }, [dispatch]);
+
+  const onClickReply = useCallback(
+    (id: number) => {
+      router.push(`/reply/${id}`);
+    },
+    [router]
+  );
+
   return (
     <Container fluid>
-      <div>hi</div>
       <div style={{ height: 500, width: "100%" }}>
         <ComplaintBarChart />
       </div>
@@ -26,20 +39,25 @@ const Index: NextPage = () => {
             {/* <th>title</th> */}
             <th>content</th>
             <th>created at</th>
+            <th>action</th>
           </tr>
         </thead>
         <tbody>
-          {/* {bookSales &&
-            Array.from(bookSales.keys()).map((element) => {
+          {reports &&
+            reports.map((element) => {
               return (
-                <tr key={element}>
-                  <td>{bookSales.get(element)?.name}</td>
-                  <td>{bookSales.get(element)?.price}</td>
-                  <td>{bookSales.get(element)?.purchaseCount}</td>
-                  <td>{bookSales.get(element)?.sales}</td>
+                <tr key={element.id}>
+                  <td>{element.category}</td>
+                  <td>{element.content}</td>
+                  <td>{element.created_at}</td>
+                  <td>
+                    <Button onClick={() => onClickReply(element.id)}>
+                      Reply
+                    </Button>
+                  </td>
                 </tr>
               );
-            })} */}
+            })}
         </tbody>
       </Table>
     </Container>
