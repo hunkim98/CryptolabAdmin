@@ -16,7 +16,7 @@ export default async function handler(
     const response = await axios.get<GetCategoriesResDto>(
       `${process.env.API_URL}/category/`
     );
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).send(response.data);
   } else {
     res.status(502).end();

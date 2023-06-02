@@ -9,6 +9,7 @@ const Report: NextPage = () => {
     <Container fluid>
       <Title>Reply</Title>
       <TextInput
+        style={{ marginTop: 20 }}
         value={input}
         onChange={(e) => {
           setInput(e.target.value);

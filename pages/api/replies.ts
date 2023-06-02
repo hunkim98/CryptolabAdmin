@@ -15,7 +15,7 @@ export default async function handler(
       `${process.env.API_URL}/report/`,
       body
     );
-    console.log(response.data);
+    // console.log(response.data);
     res.status(200).send(response.data);
   } else {
     res.status(405).end();

@@ -1,3 +1,7 @@
+import {
+  CategryText,
+  returnCategoryFromIndex,
+} from "@/utils/categoryVectorizer";
 import React, { PureComponent } from "react";
 import {
   BarChart,
@@ -11,8 +15,20 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default class ComplaintBarChart extends PureComponent {
-  constructor(props: any) {
+export interface BarElement {
+  date: string;
+}
+
+export type BarChartArrayElement = {
+  [key in CategryText]?: number;
+} & {
+  date: string;
+};
+
+export default class ComplaintBarChart extends PureComponent<{
+  data: Array<BarChartArrayElement>;
+}> {
+  constructor(props: { data: Array<BarChartArrayElement> }) {
     super(props);
   }
   static demoUrl = "https://codesandbox.io/s/stacked-bar-chart-s47i2";
@@ -23,50 +39,7 @@ export default class ComplaintBarChart extends PureComponent {
         <BarChart
           width={500}
           height={300}
-          data={[
-            {
-              name: "Page A",
-              uv: 4000,
-              pv: 2400,
-              amt: 2400,
-            },
-            {
-              name: "Page B",
-              uv: 3000,
-              pv: 1398,
-              amt: 2210,
-            },
-            {
-              name: "Page C",
-              uv: 2000,
-              pv: 9800,
-              amt: 2290,
-            },
-            {
-              name: "Page D",
-              uv: 2780,
-              pv: 3908,
-              amt: 2000,
-            },
-            {
-              name: "Page E",
-              uv: 1890,
-              pv: 4800,
-              amt: 2181,
-            },
-            {
-              name: "Page F",
-              uv: 2390,
-              pv: 3800,
-              amt: 2500,
-            },
-            {
-              name: "Page G",
-              uv: 3490,
-              pv: 4300,
-              amt: 2100,
-            },
-          ]}
+          data={this.props.data}
           margin={{
             top: 20,
             right: 30,
@@ -75,12 +48,61 @@ export default class ComplaintBarChart extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="date" />
           <YAxis />
-          <Tooltip />
+          <Tooltip
+            filterNull={true}
+            labelStyle={{
+              color: "white",
+              backgroundColor: "#363636",
+            }}
+            wrapperStyle={{
+              backgroundColor: "#363636",
+              color: "white",
+              // border: "1px solid white",
+            }}
+            itemStyle={{
+              backgroundColor: "#363636",
+
+              // border: "1px solid white",
+            }}
+          />
           <Legend />
-          <Bar dataKey="pv" stackId="a" fill="#8884d8" />
-          <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+          <Bar
+            dataKey={returnCategoryFromIndex(1)}
+            stackId="a"
+            fill="#ffd6a5"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(2)}
+            stackId="a"
+            fill="#fdffb6"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(3)}
+            stackId="a"
+            fill="#caffbf"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(4)}
+            stackId="a"
+            fill="#9bf6ff"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(5)}
+            stackId="a"
+            fill="#a0c4ff"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(6)}
+            stackId="a"
+            fill="#bdb2ff"
+          />
+          <Bar
+            dataKey={returnCategoryFromIndex(7)}
+            stackId="a"
+            fill="#ffc6ff"
+          />
         </BarChart>
       </ResponsiveContainer>
     );

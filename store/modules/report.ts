@@ -35,7 +35,7 @@ export const reportSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getReports.fulfilled, (state, action) => {
-      state.reports = action.payload;
+      state.reports = action.payload.reverse();
     });
   },
 });
