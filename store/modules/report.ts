@@ -2,9 +2,25 @@ import {
   GetReportItemType,
   GetReportsResDto,
 } from "@/dto/reports/res/get.reports.res.dto";
+import { GetSpecificReportResDto } from "@/dto/reports/res/get.specific.report.res.dto";
 import { Report } from "@/models/report";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+
+export const getSpecificReport = createAsyncThunk<
+  GetSpecificReportResDto,
+  number
+>("report/getSpecificReport", async (id, { rejectWithValue }) => {
+  try {
+    const response = await axios.get<GetSpecificReportResDto>(
+      `/api/reports/${id}`
+    );
+    return response.data;
+  } catch (e: any) {
+    console.log(e);
+    return rejectWithValue(e.response.data);
+  }
+});
 
 export const getReports = createAsyncThunk<
   GetReportsResDto,
@@ -39,6 +55,9 @@ export const reportSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getReports.fulfilled, (state, action) => {
       state.reports = action.payload.reverse();
+    });
+    builder.addCase(getSpecificReport.fulfilled, (state, action) => {
+      state.selectedReport = action.payload;
     });
   },
 });
