@@ -95,7 +95,7 @@ const Index: NextPage = () => {
           {paginatedReports &&
             paginatedReports.map((element) => {
               return (
-                <tr key={element.id}>
+                <tr key={returnCategoryFromIndex(element.id)}>
                   <td>{element.category}</td>
                   <td>{element.content}</td>
                   <td>{new Date(element.created_at).toLocaleDateString()}</td>
