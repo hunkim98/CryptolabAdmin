@@ -10,7 +10,7 @@ export default async function handler(
 ) {
   const body = req.body as PostRepliesBodyDto;
 
-  if (req.method === "PATCH") {
+  if (req.method === "POST") {
     try {
       const response = await axios.post<PostRepliesBodyDto>(
         `${process.env.API_URL}/reply/`,

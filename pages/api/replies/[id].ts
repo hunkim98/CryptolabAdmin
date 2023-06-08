@@ -2,6 +2,7 @@
 import { PatchRepliesBodyDto } from "@/dto/replies/body/patch.replies.body";
 import { PostRepliesBodyDto } from "@/dto/replies/body/post.replies.body.dto";
 import { PatchRepliesResDto } from "@/dto/replies/res/patch.replies.res.dto";
+import { PostRepliesResDto } from "@/dto/replies/res/post.replies.res.dto";
 import { GetReportsResDto } from "@/dto/reports/res/get.reports.res.dto";
 import { Reply } from "@/models/reply";
 import axios from "axios";
@@ -13,12 +14,12 @@ export default async function handler(
 ) {
   const query = req.query;
   const { id } = query;
-  const body = req.body as PatchRepliesBodyDto;
   if (!id) {
     res.status(502).end();
   }
 
   if (req.method === "PATCH") {
+    const body = req.body as PatchRepliesBodyDto;
     try {
       const response = await axios.patch<PatchRepliesResDto>(
         `${process.env.API_URL}/reply/${id}/`,
